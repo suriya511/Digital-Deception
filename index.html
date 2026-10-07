@@ -1,0 +1,836 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Reward Vault - Digital Deception Demo</title>
+
+
+<style>
+
+/* ---------- BASIC ---------- */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    min-height: 100vh;
+    color: white;
+    background: #050816;
+    overflow-x: hidden;
+}
+
+
+/* ---------- BACKGROUND ---------- */
+
+body::before {
+    content: "";
+    position: fixed;
+    width: 500px;
+    height: 500px;
+    background: #164e63;
+    filter: blur(180px);
+    opacity: 0.4;
+    top: -150px;
+    left: -150px;
+    z-index: -1;
+}
+
+body::after {
+    content: "";
+    position: fixed;
+    width: 500px;
+    height: 500px;
+    background: #4c1d95;
+    filter: blur(180px);
+    opacity: 0.35;
+    bottom: -200px;
+    right: -150px;
+    z-index: -1;
+}
+
+
+/* ---------- HEADER ---------- */
+
+header {
+    height: 75px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0 8%;
+
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+
+    background: rgba(5,8,22,0.8);
+}
+
+.logo {
+    font-size: 23px;
+    font-weight: bold;
+    letter-spacing: 2px;
+}
+
+.logo span {
+    color: #00e5ff;
+}
+
+.secure {
+    color: #72f5c2;
+    font-size: 13px;
+}
+
+
+/* ---------- MAIN ---------- */
+
+main {
+    display: flex;
+    justify-content: center;
+}
+
+.hero {
+    width: 650px;
+    text-align: center;
+    padding: 55px 20px;
+}
+
+
+/* ---------- BADGE ---------- */
+
+.badge {
+    display: inline-block;
+
+    padding: 10px 20px;
+
+    border-radius: 30px;
+
+    color: #ffc107;
+
+    border: 1px solid #ffc107;
+
+    background: rgba(255,193,7,0.08);
+
+    font-size: 12px;
+
+    letter-spacing: 2px;
+}
+
+
+/* ---------- HEADING ---------- */
+
+h1 {
+    margin-top: 25px;
+
+    font-size: 48px;
+
+    line-height: 1.1;
+}
+
+h1 span {
+    display: block;
+
+    margin-top: 8px;
+
+    font-size: 70px;
+
+    color: #00e5ff;
+
+    text-shadow:
+        0 0 20px rgba(0,229,255,0.5);
+}
+
+.subtitle {
+    margin-top: 18px;
+
+    color: #aeb6cc;
+
+    line-height: 1.6;
+}
+
+
+/* ---------- REWARD CARD ---------- */
+
+.reward-card {
+
+    position: relative;
+
+    width: 430px;
+
+    margin: 35px auto;
+
+    padding: 30px;
+
+    border-radius: 22px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #172554,
+            #312e81
+        );
+
+    border: 1px solid rgba(255,255,255,0.2);
+
+    box-shadow:
+        0 25px 60px rgba(0,0,0,0.5);
+
+    overflow: hidden;
+}
+
+.reward-card::before {
+
+    content: "";
+
+    position: absolute;
+
+    width: 200px;
+    height: 200px;
+
+    border-radius: 50%;
+
+    background: rgba(0,229,255,0.12);
+
+    right: -80px;
+    top: -80px;
+}
+
+.card-top {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    color: #b7c4ff;
+
+    font-size: 12px;
+
+    letter-spacing: 2px;
+}
+
+.money {
+
+    margin: 20px 0;
+
+    font-size: 55px;
+
+    font-weight: bold;
+}
+
+.reward-card p {
+
+    color: #b7c4ff;
+
+    font-size: 12px;
+
+    letter-spacing: 3px;
+}
+
+
+/* ---------- VOUCHER ---------- */
+
+.voucher {
+
+    margin-top: 20px;
+
+    padding: 12px;
+
+    border-radius: 10px;
+
+    border: 1px dashed #00e5ff;
+
+    color: #00e5ff;
+
+    background: rgba(0,229,255,0.08);
+}
+
+
+/* ---------- WARNING ---------- */
+
+.warning {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+
+    padding: 18px;
+
+    margin-bottom: 25px;
+
+    text-align: left;
+
+    border-radius: 15px;
+
+    background: rgba(255,80,80,0.08);
+
+    border: 1px solid rgba(255,80,80,0.5);
+}
+
+.warning-icon {
+    font-size: 30px;
+}
+
+.warning strong {
+    color: #ff7777;
+}
+
+.warning p {
+
+    margin-top: 5px;
+
+    color: #b9bfd0;
+
+    font-size: 13px;
+
+    line-height: 1.5;
+}
+
+
+/* ---------- FORM ---------- */
+
+.verification-box {
+
+    padding: 30px;
+
+    border-radius: 20px;
+
+    background: rgba(255,255,255,0.05);
+
+    border: 1px solid rgba(255,255,255,0.12);
+
+    backdrop-filter: blur(10px);
+}
+
+.verification-box h2 {
+    margin-bottom: 8px;
+}
+
+.small {
+
+    margin-bottom: 20px;
+
+    color: #929ab0;
+
+    font-size: 13px;
+}
+
+
+/* ---------- INPUT ---------- */
+
+input {
+
+    width: 100%;
+
+    padding: 15px;
+
+    margin-bottom: 14px;
+
+    border-radius: 10px;
+
+    border: 1px solid #343b55;
+
+    outline: none;
+
+    background: #0b1024;
+
+    color: white;
+
+    font-size: 14px;
+}
+
+input:focus {
+    border-color: #00e5ff;
+}
+
+
+/* ---------- BUTTON ---------- */
+
+button {
+
+    width: 100%;
+
+    padding: 16px;
+
+    border: none;
+
+    border-radius: 10px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #00b8d4,
+            #6366f1
+        );
+
+    color: white;
+
+    font-weight: bold;
+
+    font-size: 15px;
+
+    cursor: pointer;
+
+    transition: 0.3s;
+}
+
+button:hover {
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 10px 30px rgba(0,229,255,0.3);
+}
+
+.secure-text {
+
+    margin-top: 15px;
+
+    color: #6ee7b7;
+
+    font-size: 12px;
+}
+
+
+/* ---------- POPUP ---------- */
+
+.popup {
+
+    display: none;
+
+    position: fixed;
+
+    inset: 0;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 20px;
+
+    background: rgba(0,0,0,0.82);
+}
+
+.popup-box {
+
+    width: 100%;
+
+    max-width: 450px;
+
+    padding: 35px;
+
+    text-align: center;
+
+    border-radius: 20px;
+
+    background: #111827;
+
+    border: 1px solid #ff4d4d;
+
+    box-shadow:
+        0 0 60px rgba(255,0,0,0.3);
+
+    animation: popup 0.3s ease;
+}
+
+@keyframes popup {
+
+    from {
+        transform: scale(0.7);
+        opacity: 0;
+    }
+
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.danger {
+    font-size: 50px;
+}
+
+.popup-box h2 {
+
+    margin: 15px 0;
+
+    color: #ff6b6b;
+}
+
+.popup-box > p {
+    color: #c5cada;
+}
+
+
+/* ---------- REASONS ---------- */
+
+.reason {
+
+    margin: 20px 0;
+
+    padding: 15px;
+
+    text-align: left;
+
+    border-radius: 12px;
+
+    background: #0b1020;
+}
+
+.reason p {
+
+    padding: 7px 0;
+
+    font-size: 14px;
+}
+
+.safe {
+
+    margin-bottom: 20px;
+
+    color: #6ee7b7 !important;
+}
+
+
+/* ---------- FOOTER ---------- */
+
+footer {
+
+    padding: 25px;
+
+    text-align: center;
+
+    color: #687089;
+
+    font-size: 12px;
+}
+
+
+/* ---------- MOBILE ---------- */
+
+@media(max-width:600px) {
+
+    h1 {
+        font-size: 35px;
+    }
+
+    h1 span {
+        font-size: 50px;
+    }
+
+    .reward-card {
+        width: 100%;
+    }
+
+    .hero {
+        padding-top: 40px;
+    }
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- HEADER -->
+
+<header>
+
+    <div class="logo">
+        <!-- REWARD<span>VAULT</span> -->HUMAN FIREWALL
+    </div>
+
+    <div class="secure">
+        🔒 SECURITY DEMO
+    </div>
+
+</header>
+
+
+<!-- MAIN -->
+
+<main>
+
+<section class="hero">
+
+
+    <div class="badge">
+        🎉 LIMITED-TIME REWARD
+    </div>
+
+
+    <h1>
+
+        You Could Win
+
+        <span>₹50,000</span>
+
+    </h1>
+
+
+    <p class="subtitle">
+
+        Complete the verification to unlock
+        your exclusive digital reward voucher.
+
+    </p>
+
+
+    <!-- REWARD -->
+
+    <div class="reward-card">
+
+        <div class="card-top">
+
+            <span>EXCLUSIVE REWARD</span>
+
+            <span>★</span>
+
+        </div>
+
+
+        <div class="money">
+            ₹50,000
+        </div>
+
+
+        <p>
+            DIGITAL REWARD VOUCHER
+        </p>
+
+
+        <div class="voucher">
+
+            🎁
+            <b>REWARD-50K</b>
+
+        </div>
+
+    </div>
+
+
+    <!-- WARNING -->
+
+    <div class="warning">
+
+        <div class="warning-icon">
+            ⚠️
+        </div>
+
+        <div>
+
+            <strong>
+                Action Required
+            </strong>
+
+            <p>
+
+                Your account verification is pending.
+                Complete it now to avoid temporary restriction.
+
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <!-- VERIFICATION -->
+
+    <div class="verification-box">
+
+        <h2>
+            🔐 Verify Your Account
+        </h2>
+
+        <p class="small">
+
+            Complete the verification below
+            to claim your reward.
+
+        </p>
+
+
+        <input
+            type="email"
+            id="email"
+            placeholder="Enter your email address"
+        >
+
+
+        <input
+            type="password"
+            id="password"
+            placeholder="Enter your password"
+        >
+
+
+        <button onclick="verifyAccount()">
+
+            VERIFY & CLAIM ₹50,000
+
+        </button>
+
+
+        <p class="secure-text">
+
+            🔒 Educational security simulation
+
+        </p>
+
+    </div>
+
+
+</section>
+
+</main>
+
+
+<!-- POPUP -->
+
+<div id="popup" class="popup">
+
+    <div class="popup-box">
+
+        <div class="danger">
+            🚨
+        </div>
+
+
+        <h2>
+            PHISHING WARNING
+        </h2>
+
+
+        <p>
+
+            STOP! This was a
+            <b>Digital Deception Simulation.</b>
+
+        </p>
+
+
+        <div class="reason">
+
+            <p>
+                🎭 <b>Deception:</b>
+                Fake reward
+            </p>
+
+            <p>
+                😨 <b>Fear:</b>
+                Account will be locked
+            </p>
+
+            <p>
+                ⏰ <b>Urgency:</b>
+                Verify immediately
+            </p>
+
+            <p>
+                🎁 <b>Greed:</b>
+                ₹50,000 reward
+            </p>
+
+        </div>
+
+
+        <p class="safe">
+
+            🛡️ Never enter passwords or OTPs
+            on suspicious websites.
+
+        </p>
+
+
+        <button onclick="closePopup()">
+
+            UNDERSTAND
+
+        </button>
+
+    </div>
+
+</div>
+
+
+<footer>
+
+    Digital Deception Awareness Project
+    • Educational Simulation
+
+</footer>
+
+
+
+<script>
+
+/* ---------- VERIFY ---------- */
+
+function verifyAccount() {
+
+    let email =
+        document.getElementById("email").value;
+
+    let password =
+        document.getElementById("password").value;
+
+
+    if (email === "" || password === "") {
+
+        alert(
+            "Please complete the verification fields."
+        );
+
+        return;
+
+    }
+
+
+    /*
+       EDUCATIONAL SIMULATION
+
+       The entered information is NOT:
+       - stored
+       - sent to a server
+       - saved in localStorage
+    */
+
+
+    document.getElementById("popup").style.display =
+        "flex";
+
+}
+
+
+/* ---------- CLOSE ---------- */
+
+function closePopup() {
+
+    document.getElementById("popup").style.display =
+        "none";
+
+
+    document.getElementById("email").value = "";
+
+    document.getElementById("password").value = "";
+
+}
+
+</script>
+
+
+</body>
+
+</html>
